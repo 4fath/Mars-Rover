@@ -15,15 +15,9 @@ public class Mars {
         this.Y = Y;
     }
 
-    public void addRover(Rover rover) {
+    public void navigateRover(Rover rover, String sentence) {
         this.rover = rover;
-    }
 
-    public Rover getRover() {
-        return rover;
-    }
-
-    public void navigateRover(String sentence) {
         char[] steps = sentence.toCharArray();
 
         for (char step : steps) {

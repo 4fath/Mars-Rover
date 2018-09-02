@@ -4,39 +4,47 @@ import solution.model.Direction;
 import solution.model.Mars;
 import solution.model.Rover;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public class Solution {
 
     public static void main(final String[] args) {
+        System.out.println("Please type 'q' when you finished giving rovers' input(coordinate and sentence)");
 
-        // for now, lets start with dummy data
-        // TODO : read values from console
-        int X = 5;
-        int Y = 5;
+        final Scanner scanner = new Scanner(System.in);
 
-        int r1x = 1;
-        int r1y = 2;
-        char r1h = 'N';
-        String r1sentence = "LMLMLMLMM";
+        String marsUpperRight = scanner.nextLine();
+        String[] marsArr = marsUpperRight.split("\\s+");
 
-        final Mars mars = new Mars(X , Y);
+        int X = Integer.valueOf(marsArr[0]);
+        int Y = Integer.valueOf(marsArr[1]);
+        final Mars mars = new Mars(X, Y);
 
-        Rover r1 = new Rover(r1x, r1y, Direction.getDirection(r1h));
-        mars.addRover(r1);
-        mars.navigateRover(r1sentence);
+        List<Rover> roversOnMars = new ArrayList<Rover>();
+        while (true) {
+            String currentLine = scanner.nextLine();
+            if ("q".equalsIgnoreCase(currentLine)) {
+                break;
+            }
 
-        System.out.println(mars.getRover());
+            String[] roversInfos = currentLine.split("\\s+");
+            String sentenceLine = scanner.nextLine();
 
-        int r2x = 3;
-        int r2y = 3;
-        char r2h = 'E';
-        String r2sentence = "MMRMMRMRRM";
+            int rx = Integer.valueOf(roversInfos[0]);
+            int ry = Integer.valueOf(roversInfos[1]);
+            char rh = roversInfos[2].charAt(0);
 
-        Rover r2 = new Rover(r2x, r2y, Direction.getDirection(r2h));
-        mars.addRover(r2);
-        mars.navigateRover(r2sentence);
+            Rover rover = new Rover(rx, ry, Direction.getDirection(rh));
+            mars.navigateRover(rover, sentenceLine);
 
-        System.out.println(mars.getRover());
+            roversOnMars.add(rover);
+        }
 
+        for (Rover rover : roversOnMars) {
+            System.out.println(rover);
+        }
     }
 
 }
