@@ -26,7 +26,7 @@ public enum Direction {
         return NORTH;
     }
 
-    Direction getNext(boolean reverseWay) {
+    public Direction getNext(boolean reverseWay) {
         if (this.equals(NORTH)) {
             if (reverseWay) {
                 return WEST;
